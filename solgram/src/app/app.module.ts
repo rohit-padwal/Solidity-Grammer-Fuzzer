@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { ResultsComponent } from './results/results.component';
 import { MetricsComponent } from './metrics/metrics.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { MetricsComponent } from './metrics/metrics.component';
   imports: [
     MatTabsModule,
     MatToolbarModule,
+    MatFormFieldModule,
+    MatCardModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
