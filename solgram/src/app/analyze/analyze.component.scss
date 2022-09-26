@@ -1,9 +1,19 @@
 
-  
+  .mat-card-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+  }
 .mat-card-content{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: auto;
+    padding-left: 20%;
 } 
 
 
+.mat-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+}
