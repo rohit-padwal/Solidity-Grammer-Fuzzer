@@ -1,13 +1,22 @@
+.mat-toolbar {
+  background: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .mat-card{
     background-color: #f5f2f7;
-    
-}
-  .mat-card-title{
-    display: flex;
-    flex-direction: column;
-    align-items: center ;
     color: black;
-  }
+}
+
+.mat-card-title{
+  display: flex;
+  flex-direction: column;
+  align-items: center ;
+  color: black;
+}
 .mat-card-content{
     display: flex;
     flex-direction: column;

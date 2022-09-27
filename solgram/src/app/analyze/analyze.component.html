@@ -3,14 +3,13 @@
   <br>
 <mat-card>
     <mat-card-title>Upload your solidity file</mat-card-title>
-    <!-- <mat-card-subtitle>On your own risk! Lol</mat-card-subtitle> -->
-
     <mat-card-content>
-        <button mat-raised-button color="primary">
-            <input type="file">
-            Browse
-        </button>
-        
+        <mat-toolbar appearance="outline">
+            <input type="file" accept=".sol" (change)="chooseFile($event)">
+            <button mat-raised-button color="primary" (click)="uploadFile(filename)">
+                Upload
+            </button>
+        </mat-toolbar>
     </mat-card-content>
 
 </mat-card>
