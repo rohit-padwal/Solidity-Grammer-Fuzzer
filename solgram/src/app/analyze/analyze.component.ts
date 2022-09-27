@@ -16,7 +16,7 @@ export class AnalyzeComponent implements OnInit {
   }
 
   uploadFile(filename: string) {
-    if(filename !== 'Select File') {
+    if(filename !== 'Choose a File') {
       this.snackBar.open(`${filename} uploaded successfully.`, '', {
         duration:2000
       });
