@@ -8,27 +8,27 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AnalyzeComponent implements OnInit {
 
-  fileName: string = 'Select File';
+  filename: string = 'Choose a File';
 
   constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
-  uploadFile(fileName: string) {
-    if(fileName !== 'Select File') {
-      this.snackBar.open(`${fileName} uploaded successfully.`, '', {
+  uploadFile(filename: string) {
+    if(filename !== 'Select File') {
+      this.snackBar.open(`${filename} uploaded successfully.`, '', {
         duration:2000
       });
     }
   }
 
-  selectFile(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      const file: File = event.target.files[0];
-      this.fileName = file.name;
+  chooseFile(e: any): void {
+    if (e.target.files && e.target.files[0]) {
+      const file: File = e.target.files[0];
+      this.filename = file.name;
     } else {
-      this.fileName = 'Select File';
+      this.filename = 'Choose a File';
     }
   }
 }

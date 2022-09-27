@@ -5,8 +5,8 @@
     <mat-card-title>Upload your solidity file</mat-card-title>
     <mat-card-content>
         <mat-toolbar appearance="outline">
-            <input type="file" accept=".sol" (change)="selectFile($event)">
-            <button mat-raised-button color="primary" (click)="uploadFile(fileName)">
+            <input type="file" accept=".sol" (change)="chooseFile($event)">
+            <button mat-raised-button color="primary" (click)="uploadFile(filename)">
                 Upload
             </button>
         </mat-toolbar>
