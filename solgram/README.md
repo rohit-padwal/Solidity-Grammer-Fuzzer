@@ -4,15 +4,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 #Basic Steps
 
-● Download and install node.js
+● Download and install [Node.js](https://nodejs.org/en/download/)
 
-● Install visual studio code
+● Install [Visual studio code](https://code.visualstudio.com/download)
 
-● Clone the repository from our github link
+● Clone the repository from our [github link](https://github.com/rohit-padwal/solGram)
 
 ● Import the project folder into visual studio code
 
-● To install angular cli, run command “npm i @angular/cli” in cmd line
+● To install [Angular](https://angular.io/guide/setup-local) cli, run command “npm i @angular/cli” in cmd line
 
 ● Run “npm install” followed by “npm start” in cmd line
 
