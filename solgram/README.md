@@ -3,12 +3,19 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
 #Basic Steps
+
 ● Download and install node.js
+
 ● Install visual studio code
+
 ● Clone the repository from our github link
+
 ● Import the project folder into visual studio code
+
 ● To install angular cli, run command “npm i @angular/cli” in cmd line
+
 ● Run “npm install” followed by “npm start” in cmd line
+
 ● A web application would run locally on your default web browser
 
 ## Development server
