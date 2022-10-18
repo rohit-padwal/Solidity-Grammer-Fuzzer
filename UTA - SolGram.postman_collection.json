@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "ab97fa22-9767-48f2-b3c2-c475ac146e0f",
+		"name": "UTA - SolGram",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7039093"
+	},
+	"item": [
+		{
+			"name": "Fetch Code from address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\" : \"0x06012c8cf97bead5deae237070f9587f8e7a266d\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/fetchSourceCode",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"fetchSourceCode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse Source Code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"SourceCode\": \"pragma solidity ^0.8.13;contract Counter {uint public count;function get() public view returns (uint) {return count;}function inc() public {count += 1;}function dec() public {count -= 1;}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/parseSourceCode",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"parseSourceCode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/chinmaymandale/Projects/GitHub/solGram/server/contracts/newfile.sol"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/parseFile",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"parseFile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
