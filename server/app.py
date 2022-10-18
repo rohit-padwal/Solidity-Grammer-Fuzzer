@@ -34,6 +34,17 @@ def parse_source_code():
     input = request_json['SourceCode']
     return parse_code(input)
 
-def parse_files(file_path):
-    parsed_output = parser.parse_file(file_path, loc=False)
-    return parsed_output
+@app.route('/parseFile', methods = ['POST'])
+def parse_file():
+    file_input = request.files['file']
+    if file_input:
+        file_name = file_input.filename
+        return parse_files(file_name)
+    return "Error Parsing File"
+
+def parse_files(file_input):
+    try:
+        parsed_output = parser.parse_file("contracts/"+file_input, loc=True)
+    except Exception as e:
+        print(e)
+    return json.dumps(parsed_output)
