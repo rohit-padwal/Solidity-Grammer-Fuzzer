@@ -1,0 +1,148 @@
+{
+    "children": [
+        {
+            "name": "solidity",
+            "type": "PragmaDirective",
+            "value": "^0.8.13"
+        },
+        {
+            "baseContracts": [],
+            "kind": "contract",
+            "name": "Counter",
+            "subNodes": [
+                {
+                    "initialValue": null,
+                    "type": "StateVariableDeclaration",
+                    "variables": [
+                        {
+                            "expression": null,
+                            "isDeclaredConst": false,
+                            "isIndexed": false,
+                            "isStateVar": true,
+                            "name": "count",
+                            "type": "VariableDeclaration",
+                            "typeName": {
+                                "name": "uint",
+                                "type": "ElementaryTypeName"
+                            },
+                            "visibility": "public"
+                        }
+                    ]
+                },
+                {
+                    "body": {
+                        "statements": [
+                            {
+                                "name": "count",
+                                "type": "Identifier"
+                            }
+                        ],
+                        "type": "Block"
+                    },
+                    "isConstructor": false,
+                    "isFallback": false,
+                    "isReceive": false,
+                    "modifiers": [],
+                    "name": "get",
+                    "parameters": {
+                        "parameters": [],
+                        "type": "ParameterList"
+                    },
+                    "returnParameters": {
+                        "parameters": [
+                            {
+                                "isIndexed": false,
+                                "isStateVar": false,
+                                "name": null,
+                                "storageLocation": null,
+                                "type": "Parameter",
+                                "typeName": {
+                                    "name": "uint",
+                                    "type": "ElementaryTypeName"
+                                }
+                            }
+                        ],
+                        "type": "ParameterList"
+                    },
+                    "stateMutability": "view",
+                    "type": "FunctionDefinition",
+                    "visibility": "public"
+                },
+                {
+                    "body": {
+                        "statements": [
+                            {
+                                "expression": {
+                                    "left": {
+                                        "name": "count",
+                                        "type": "Identifier"
+                                    },
+                                    "operator": "+=",
+                                    "right": {
+                                        "number": "1",
+                                        "subdenomination": null,
+                                        "type": "NumberLiteral"
+                                    },
+                                    "type": "BinaryOperation"
+                                },
+                                "type": "ExpressionStatement"
+                            }
+                        ],
+                        "type": "Block"
+                    },
+                    "isConstructor": false,
+                    "isFallback": false,
+                    "isReceive": false,
+                    "modifiers": [],
+                    "name": "inc",
+                    "parameters": {
+                        "parameters": [],
+                        "type": "ParameterList"
+                    },
+                    "returnParameters": [],
+                    "stateMutability": null,
+                    "type": "FunctionDefinition",
+                    "visibility": "public"
+                },
+                {
+                    "body": {
+                        "statements": [
+                            {
+                                "expression": {
+                                    "left": {
+                                        "name": "count",
+                                        "type": "Identifier"
+                                    },
+                                    "operator": "-=",
+                                    "right": {
+                                        "number": "1",
+                                        "subdenomination": null,
+                                        "type": "NumberLiteral"
+                                    },
+                                    "type": "BinaryOperation"
+                                },
+                                "type": "ExpressionStatement"
+                            }
+                        ],
+                        "type": "Block"
+                    },
+                    "isConstructor": false,
+                    "isFallback": false,
+                    "isReceive": false,
+                    "modifiers": [],
+                    "name": "dec",
+                    "parameters": {
+                        "parameters": [],
+                        "type": "ParameterList"
+                    },
+                    "returnParameters": [],
+                    "stateMutability": null,
+                    "type": "FunctionDefinition",
+                    "visibility": "public"
+                }
+            ],
+            "type": "ContractDefinition"
+        }
+    ],
+    "type": "SourceUnit"
+}
