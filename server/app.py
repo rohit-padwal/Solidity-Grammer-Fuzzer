@@ -1,9 +1,6 @@
 from flask import Flask, request
 from solidity_parser import parser
 import urllib, json
-import pprint
-
-import subprocess
 
 app = Flask(__name__)
 
