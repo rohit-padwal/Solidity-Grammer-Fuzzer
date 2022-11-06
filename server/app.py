@@ -1,4 +1,6 @@
 from pprint import pprint
+import os
+import subprocess
 from flask import Flask, request
 from solidity_parser import parser
 import urllib, json
@@ -65,3 +67,11 @@ def count_comments(code):
         return len(match)
     else:
         return 0
+
+@app.route('/lintAllFiles', methods = ['POST'])
+def lintAllFiles():
+    p = subprocess.Popen('solhint --fix "contracts/**/*.sol"', stdout=subprocess.PIPE, shell=True)
+    (output, err) = p.communicate()
+    p_status = p.wait()
+    print(p_status)
+    return output
