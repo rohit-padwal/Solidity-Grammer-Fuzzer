@@ -22,6 +22,7 @@ def initialize(parsed_output):
     parsed_output["modifier_count"] = 0
     parsed_output["mapping_count"] = 0
     parsed_output["address_count"] = 0
+    parsed_output["lines"] = 0
 
 def parse(dict_item, parsed_output):
     if (dict_item.get("name") == "solidity" and dict_item.get("type") == "PragmaDirective"):
@@ -46,4 +47,7 @@ def parse(dict_item, parsed_output):
         parsed_output["library_count"] = parsed_output.get("library_count", 0) + 1
     elif dict_item.get("kind") == "interface":
         parsed_output["interface_count"] = parsed_output.get("interface_count", 0) + 1
-    
+    if "loc" in dict_item:
+        loc = dict_item.get("loc")
+        end = loc.get("end")
+        parsed_output["lines"] = end.get("line")

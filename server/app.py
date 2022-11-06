@@ -1,12 +1,11 @@
+from pprint import pprint
 from flask import Flask, request
 from solidity_parser import parser
 import urllib, json
 import parse_ast
+import re
 
 app = Flask(__name__)
-
-def parse_tree(input_ast):
-    return parse_ast.parse_syntax_tree(input_ast)
 
 @app.route('/fetchSourceCode', methods = ['POST'])
 def fetch_source_code():
@@ -29,8 +28,10 @@ def get_src_code(contract_addr):
     return input
 
 def parse_code(input):
-    input_ast = parser.parse(input, loc=False)
+    input_ast = parser.parse(input, loc=True)
+    comment_count = count_comments(input)
     parsed_output = parse_tree(input_ast)
+    parsed_output["comment_count"] = comment_count
     return parsed_output
 
 @app.route('/parseSourceCode', methods = ['POST'])
@@ -49,8 +50,18 @@ def parse_file():
 
 def parse_files(file_input):
     try:
-        input_ast = parser.parse_file("contracts/"+file_input, loc=False)
+        input_ast = parser.parse_file("contracts/"+file_input, loc=True)
         parsed_output = parse_tree(input_ast)
     except Exception as e:
         print(e)
     return parsed_output
+
+def parse_tree(input_ast):
+    return parse_ast.parse_syntax_tree(input_ast)
+
+def count_comments(code):
+    match = re.findall("(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)", code)
+    if match:
+        return len(match)
+    else:
+        return 0
