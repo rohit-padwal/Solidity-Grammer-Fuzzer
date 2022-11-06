@@ -1,8 +1,12 @@
 from flask import Flask, request
 from solidity_parser import parser
 import urllib, json
+import parse_ast
 
 app = Flask(__name__)
+
+def parse_tree(input_ast):
+    return parse_ast.parse_syntax_tree(input_ast)
 
 @app.route('/fetchSourceCode', methods = ['POST'])
 def fetch_source_code():
@@ -25,7 +29,8 @@ def get_src_code(contract_addr):
     return input
 
 def parse_code(input):
-    parsed_output = parser.parse(input, loc=False)
+    input_ast = parser.parse(input, loc=False)
+    parsed_output = parse_tree(input_ast)
     return parsed_output
 
 @app.route('/parseSourceCode', methods = ['POST'])
@@ -44,7 +49,8 @@ def parse_file():
 
 def parse_files(file_input):
     try:
-        parsed_output = parser.parse_file("contracts/"+file_input, loc=True)
+        input_ast = parser.parse_file("contracts/"+file_input, loc=False)
+        parsed_output = parse_tree(input_ast)
     except Exception as e:
         print(e)
-    return json.dumps(parsed_output)
+    return parsed_output
