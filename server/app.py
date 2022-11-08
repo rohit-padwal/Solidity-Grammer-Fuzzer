@@ -1,5 +1,4 @@
 from pprint import pprint
-import os
 import subprocess
 from flask import Flask, request
 from solidity_parser import parser
@@ -29,6 +28,18 @@ def get_src_code(contract_addr):
         return "Source code not found"
     return input
 
+@app.route('/parseSourceCode', methods = ['POST'])
+def parse_source_code():
+    try:
+        request_json = request.get_json(force=True)
+        input = request_json['SourceCode']
+        result = parse_code(input)
+    except Exception as e:
+        print(e)
+        result = dict()
+        result["Error Message"] = "Error in parsing code"
+    return result
+
 def parse_code(input):
     input_ast = parser.parse(input, loc=True)
     comment_count = count_comments(input)
@@ -36,19 +47,18 @@ def parse_code(input):
     parsed_output["comment_count"] = comment_count
     return parsed_output
 
-@app.route('/parseSourceCode', methods = ['POST'])
-def parse_source_code():
-    request_json = request.get_json(force=True)
-    input = request_json['SourceCode']
-    return parse_code(input)
-
 @app.route('/parseFile', methods = ['POST'])
 def parse_file():
-    file_input = request.files['file']
-    if file_input:
-        file_name = file_input.filename
-        return parse_files(file_name)
-    return "Error Parsing File"
+    try:
+        file_input = request.files['file']
+        if file_input:
+            file_name = file_input.filename
+            result = parse_files(file_name)
+    except Exception as e:
+        print(e)
+        result = dict()
+        result["Error Message"] = "Error in parsing file"
+    return result
 
 def parse_files(file_input):
     try:

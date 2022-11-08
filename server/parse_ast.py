@@ -18,10 +18,6 @@ def initialize(parsed_output):
     parsed_output["interface_count"] = 0
     parsed_output["library_count"] = 0
     parsed_output["event_count"] = 0
-    parsed_output["payable_count"] = 0
-    parsed_output["modifier_count"] = 0
-    parsed_output["mapping_count"] = 0
-    parsed_output["address_count"] = 0
     parsed_output["lines"] = 0
 
 def parse(dict_item, parsed_output):
@@ -35,14 +31,6 @@ def parse(dict_item, parsed_output):
         parsed_output["function_count"] = parsed_output.get("function_count", 0) + 1
     elif dict_item.get("type") == "EventDefinition":
         parsed_output["event_count"] = parsed_output.get("event_count", 0) + 1
-    elif dict_item.get("type") == "ModifierDefinition":
-        parsed_output["modifier_count"] = parsed_output.get("modifier_count", 0) + 1
-    elif dict_item.get("type") == "mapping":
-        parsed_output["mapping_count"] = parsed_output.get("mapping_count", 0) + 1
-    elif dict_item.get("type") ==  "ElementaryTypeName" and dict_item.get("name") == "address":
-        parsed_output["address_count"] = parsed_output.get("address_count", 0) + 1
-    if dict_item.get("stateMutability") == "payable":
-        parsed_output["payable_count"] = parsed_output.get("payable_count", 0) + 1
     if (dict_item.get("kind") == "library"):    
         parsed_output["library_count"] = parsed_output.get("library_count", 0) + 1
     elif dict_item.get("kind") == "interface":
