@@ -16,6 +16,7 @@ import { AnalyzeComponent } from './analyze/analyze.component';
 import { ResultsComponent } from './results/results.component';
 import { MetricsComponent } from './metrics/metrics.component';
 import {HttpClientModule} from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatTableModule,
     BrowserAnimationsModule
   ],
   providers: [],
