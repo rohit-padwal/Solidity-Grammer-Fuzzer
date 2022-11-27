@@ -1,8 +1,22 @@
-.mat-card {
-    align-items: center;    
-    }
+
 
     table {
-        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color:#f5f2f7;
+        width: 75%;
       }
-      
+
+      .mat-cell {
+        color: purple;
+        font-size: x-large;
+        border-bottom-color: #eee1f3;
+
+    }
+    .mat-header-cell {
+        border-bottom-color: #eee1f3;
+
+        color: purple;
+        font-size: xx-large;
+
+    }
