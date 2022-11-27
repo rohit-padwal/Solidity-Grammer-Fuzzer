@@ -15,6 +15,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { ResultsComponent } from './results/results.component';
 import { MetricsComponent } from './metrics/metrics.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MetricsComponent } from './metrics/metrics.component';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule

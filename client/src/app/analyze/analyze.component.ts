@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -8,27 +9,44 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AnalyzeComponent implements OnInit {
 
-  filename: string = 'Choose a File';
-
-  constructor(private snackBar: MatSnackBar) { }
+  file: File = {} as File;
+  
+  constructor(private snackBar: MatSnackBar,private httpClient: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  uploadFile(filename: string) {
-    if(filename !== 'Choose a File') {
-      this.snackBar.open(`${filename} uploaded successfully.`, '', {
+  uploadFile() {   
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin' : '*' });
+
+  let options = { headers: headers };
+
+    let formParams = new FormData();
+    formParams.append('file', this.file);
+    if(this.file) {
+      this.httpClient.post('http://127.0.0.1:5000/parseFile', formParams,options).subscribe(data => {
+      console.log(data);
+      this.snackBar.open(`${this.file.name} uploaded successfully.`, '', {
         duration:2000
       });
+    })
+      
     }
   }
 
   chooseFile(e: any): void {
     if (e.target.files && e.target.files[0]) {
-      const file: File = e.target.files[0];
-      this.filename = file.name;
+      //console.log(e.target.files[0]);
+      this.file = e.target.files[0];;
     } else {
-      this.filename = 'Choose a File';
+      // this.file.name = 'Choose a File';
     }
   }
+
+  sendFile() {
+    
+  }
+
 }
