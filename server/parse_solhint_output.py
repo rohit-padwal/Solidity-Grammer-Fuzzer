@@ -1,6 +1,7 @@
 import json
 
-solhint_dict = json.load(open('linter_warnings.json', 'r'))
+solgram_mitigations = json.load(open('linter_warnings.json', 'r'))
+
 
 def parse_output(output):
     string_output = output.decode()
@@ -8,15 +9,16 @@ def parse_output(output):
     output_dict = dict()
     current_key = ""
     for line in arr:
+        line = line.strip()
         found = False
         if not line == "":
             if ".sol" in line:
                 current_key = line
                 output_dict[line] = list()
             else:
-                for key in solhint_dict.keys():
+                for key in solgram_mitigations.keys():
                     if key in line:
-                        output_dict[current_key].append(line + ". " + solhint_dict[key])
+                        output_dict[current_key].append(line + ". " + solgram_mitigations[key])
                         found = True
                         break
                 if not found:

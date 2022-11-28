@@ -46,9 +46,11 @@ def parse_source_code():
 
 def parse_code(input):
     input_ast = parser.parse(input, loc=True)
-    comment_count = count_comments(input)
+    comments = dict()
+    comments["parameter"] = "comment_count"
+    comments["value"] = count_comments(input)
     parsed_output = parse_tree(input_ast)
-    parsed_output["comment_count"] = comment_count
+    parsed_output["response"].append(comments)
     return parsed_output
 
 @app.route('/parseFile', methods = ['POST'])
