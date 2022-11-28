@@ -1,12 +1,7 @@
-  <mat-toolbar
-    style="height: 100px"
-    color="primary">
-    <img src="../assets/logo.png" style="height: 85px;">
-  </mat-toolbar>
-<mat-tab-group 
-  color="primary" 
-  backgroundColor="primary"
-  mat-align-tabs="center">
+<mat-toolbar style="height: 100px" color="primary">
+  <img src="../assets/logo.png" style="height: 85px;">
+</mat-toolbar>
+<!-- <mat-tab-group [selectedIndex]="selected" color="primary" backgroundColor="primary" mat-align-tabs="center">
   <mat-tab label="Analyze">
     <app-analyze></app-analyze>
   </mat-tab>
@@ -14,6 +9,9 @@
     <app-results></app-results>
   </mat-tab>
   <mat-tab label="Metrics">
-    <app-metrics></app-metrics>
+    <app-results></app-results>
   </mat-tab>
 </mat-tab-group>
+ -->
+
+<router-outlet></router-outlet>

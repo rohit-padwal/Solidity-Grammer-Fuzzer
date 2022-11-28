@@ -17,6 +17,7 @@ import { ResultsComponent } from './results/results.component';
 import { MetricsComponent } from './metrics/metrics.component';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -38,6 +39,8 @@ import {MatTableModule} from '@angular/material/table';
     BrowserModule,
     AppRoutingModule,
     MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [],
