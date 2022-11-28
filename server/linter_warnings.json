@@ -1,0 +1,5 @@
+{
+  "reentrancy": "Ensure all state changes happen before calling external contracts. Use function modifiers that prevent re-entrancy",
+  "avoid-low-level-calls": "This is the recommended method to use when you're just sending Ether via calling the fallback function. However it is not the recommend way to call existing functions.",
+  "avoid-call-value": "'.call.value()()' was deprecated and got replaced with 'address.call{value: x}'()"
+}

@@ -4,9 +4,12 @@ from flask import Flask, request
 from solidity_parser import parser
 import urllib, json
 import parse_ast
+import parse_solhint_output
 import re
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/fetchSourceCode', methods = ['POST'])
 def fetch_source_code():
@@ -14,6 +17,7 @@ def fetch_source_code():
     contract_addr = request_json['address']
     input = get_src_code(contract_addr)
     return input
+
 
 def get_src_code(contract_addr):
     url = "https://api.etherscan.io/api?module=contract&action=getsourcecode&address={}&apikey=E5KM3HIGE2PV4RR763IQSXGZIV6UV638P2".format(contract_addr)
@@ -78,10 +82,13 @@ def count_comments(code):
     else:
         return 0
 
-@app.route('/lintAllFiles', methods = ['POST'])
+
+def parseLintOutput(output):
+    return parse_solhint_output.parse_output(output)
+
+@app.route('/lintAllFiles', methods = ['GET'])
 def lintAllFiles():
     p = subprocess.Popen('solhint --fix "contracts/**/*.sol"', stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
     p_status = p.wait()
-    print(p_status)
-    return output
+    return parseLintOutput(output)
