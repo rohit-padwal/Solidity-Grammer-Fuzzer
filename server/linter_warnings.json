@@ -1,0 +1,11 @@
+{
+  "reentrancy": "Ensure all state changes happen before calling external contracts. Use function modifiers that prevent re-entrancy",
+  "avoid-low-level-calls": "It is the recommended method to use when you're just sending Ether via calling the fallback function. However it is not the recommend way to call existing functions.",
+  "avoid-call-value": "'.call.value()()' was deprecated and got replaced with 'address.call{value: x}'()",
+  "avoid-throw": "Instead use revert, require, and assert. throw() has same semantics as revert()",
+  "avoid-tx-origin": "You should use msg.sender for authorization.",
+  "check-send-result": "For example, you can check result of 'send' call with if statement -> if(x.send(55)) {}",
+  "func-visibility": "For example, below are functions explicitly marked with visibility -> function b() internal { } \n function b() external { } \n function b() external { } \n function b() private { } \n function b() public { }",
+  "mark-callable-contracts": "When interacting with external contracts, name your variables, methods, and contract interfaces in a way that makes it clear that interacting with them is potentially unsafe. This applies to your own functions that call external contracts. For example, here is an external contract name with 'Trusted' prefix TrustedBank.withdraw(100);",
+  "state-visibility": " For state variables, external is not possible. Labeling the visibility explicitly will make it easier to catch incorrect assumptions about who can call the function or access the variable."
+}

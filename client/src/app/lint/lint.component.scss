@@ -1,0 +1,44 @@
+.main-container {
+    margin-left: 18%;
+    margin-right: 18%;
+    
+}
+
+.mat-toolbar {
+    background: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-card {
+    background-color: #f5f2f7;
+    color: black;
+    margin-left: 18%;
+    margin-right: 18%;
+}
+
+.mat-card-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.mat-card-content {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.mat-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mat-form-field {
+    color: black;
+}
+
+.mat-raised-button {}

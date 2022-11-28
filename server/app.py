@@ -4,9 +4,14 @@ from flask import Flask, request
 from solidity_parser import parser
 import urllib, json
 import parse_ast
+import parse_solhint_output
 import re
+from flask_cors import CORS
+import os
+import shutil
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/fetchSourceCode', methods = ['POST'])
 def fetch_source_code():
@@ -14,6 +19,7 @@ def fetch_source_code():
     contract_addr = request_json['address']
     input = get_src_code(contract_addr)
     return input
+
 
 def get_src_code(contract_addr):
     url = "https://api.etherscan.io/api?module=contract&action=getsourcecode&address={}&apikey=E5KM3HIGE2PV4RR763IQSXGZIV6UV638P2".format(contract_addr)
@@ -42,9 +48,11 @@ def parse_source_code():
 
 def parse_code(input):
     input_ast = parser.parse(input, loc=True)
-    comment_count = count_comments(input)
+    comments = dict()
+    comments["parameter"] = "comment_count"
+    comments["value"] = count_comments(input)
     parsed_output = parse_tree(input_ast)
-    parsed_output["comment_count"] = comment_count
+    parsed_output["response"].append(comments)
     return parsed_output
 
 @app.route('/parseFile', methods = ['POST'])
@@ -78,10 +86,19 @@ def count_comments(code):
     else:
         return 0
 
+
+def parseLintOutput(output):
+    return parse_solhint_output.parse_output(output)
+
 @app.route('/lintAllFiles', methods = ['POST'])
 def lintAllFiles():
+    file_list = request.files.getlist("file")
+    if os.path.exists("contracts"):
+        shutil.rmtree("contracts")
+    os.makedirs("contracts")
+    for uploaded_file in file_list:
+        uploaded_file.save(os.path.join('contracts/', uploaded_file.filename))
     p = subprocess.Popen('solhint --fix "contracts/**/*.sol"', stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
     p_status = p.wait()
-    print(p_status)
-    return output
+    return parseLintOutput(output)

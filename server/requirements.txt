@@ -1,2 +1,3 @@
 flask
 solidity_parser
+flask_cors

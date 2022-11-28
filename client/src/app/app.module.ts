@@ -17,6 +17,9 @@ import { ResultsComponent } from './results/results.component';
 import { MetricsComponent } from './metrics/metrics.component';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { LintComponent } from './lint/lint.component';
 
 
 @NgModule({
@@ -24,20 +27,24 @@ import {MatTableModule} from '@angular/material/table';
     AppComponent,
     AnalyzeComponent,
     ResultsComponent,
-    MetricsComponent
+    MetricsComponent,
+    HeaderComponent,
+    LintComponent
   ],
   imports: [
     MatTabsModule,
     MatToolbarModule,
     MatFormFieldModule,
-    MatCardModule,
     MatInputModule,
+    MatCardModule,
     MatButtonModule,
     MatSnackBarModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [],
