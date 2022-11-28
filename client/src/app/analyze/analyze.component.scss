@@ -6,36 +6,40 @@
   justify-content: center;
 }
 
-.mat-card{
-    background-color: #f5f2f7;
-    color: black;
-    margin-left: 18%;
-    margin-right: 18%;
-
+.mat-card {
+  background-color: #f5f2f7;
+  color: black;
+  margin-left: 18%;
+  margin-right: 18%;
 }
 
-.mat-card-title{
+.mat-card-title {
   display: flex;
   flex-direction: column;
-  align-items: center ;
+  align-items: center;
   color: black;
 }
-.mat-card-content{
-    display: flex;
-    flex-direction: column;
-    align-items: auto;
-    padding-left: 20%;
-    padding-right: 20%;
 
-} 
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: auto;
+  padding-left: 20%;
+  padding-right: 20%;
+
+}
 
 
 .mat-card-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mat-form-field {
-    color: black;
-  }
+  color: black;
+}
+
+.mat-raised-button {
+
+}

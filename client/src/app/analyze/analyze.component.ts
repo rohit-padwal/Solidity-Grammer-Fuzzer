@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -11,88 +12,107 @@ import { ApiService } from '../services/api.service';
 })
 export class AnalyzeComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({
-    contractAddress: new FormControl(['']),
-    sourceCode: new FormControl(['']),
-    solidityFile: new FormControl([{} as File]),
-  });
+  form: FormGroup;
+  contractAddress: string;
+  sourceCode: string;
+  solidityFile: File;
 
-  file: File = {} as File;
-
-  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private httpClient: HttpClient, private apiService: ApiService) { }
+  constructor(private router: Router, private snackBar: MatSnackBar, private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      contractAddress: new FormControl(['']),
-      sourceCode: new FormControl(['']),
-      solidityFile: new FormControl([{} as File]),
+      contractAddressForm: new FormControl(['']),
+      sourceCodeForm: new FormControl(['']),
+      solidityFileForm: new FormControl([{} as File]),
+    });
+  }
+
+  resetAddressForm() {
+    this.form.patchValue({
+      contractAddressForm: ''
+    });
+  }
+
+  resetSourceCodeForm() {
+    this.form.patchValue({
+      sourceCodeForm: ''
+    });
+  }
+
+  resetFileForm() {
+    this.form.patchValue({
+      solidityFileForm: {} as File
     });
   }
 
 
-  uploadFile() {
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    });
+  parseFile() {
+    this.resetAddressForm();
+    this.resetSourceCodeForm();
+    const formData = new FormData();
 
-    let options = { headers: headers };
-
-    let formParams = new FormData();
-    formParams.append('file', this.file);
-    if (this.file) {
-      this.httpClient.post('http://127.0.0.1:5000/parseFile', formParams, options).subscribe(data => {
-        console.log(data);
-        this.snackBar.open(`${this.file.name} uploaded successfully.`, '', {
-          duration: 2000
-        });
-      })
+    let fileReader = new FileReader();
+    fileReader.readAsText(this.form.get('solidityFileForm').value);
+    fileReader.onload = (e) => {
+      this.form.patchValue({
+        sourceCodeForm: fileReader.result
+      });
     }
+
+    formData.append('file', this.form.get('solidityFileForm').value);
+    // this.apiService.parseFile(formData).subscribe((res) => {
+    //   this.apiService.parseResults = res.response;
+    //   this.router.navigateByUrl('/metrics');
+    // });
   }
 
   chooseFile(e: any): void {
     if (e.target.files && e.target.files[0]) {
       this.form.patchValue({
-        solidityFile: e.target.files[0]
+        solidityFileForm: e.target.files[0]
       });
-    } else {
-      // this.file.name = 'Choose a File';
     }
   }
 
   goToResultsTab() {
-    debugger;
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    });
-
-    let options = { headers: headers };
-    // if (this.form.get('contractAddress')?.value !== '') {
-    //   const contractAddress: string = this.form.get('contractAddress')?.value;
-    //   this.apiService.fetchSourceCodeFromAddress(contractAddress, options).subscribe(res => {
-    //     console.log(res);
-    //   })
-    // } else 
-    if (this.form.get('sourceCode')?.value) {
+    this.resetAddressForm();
+    this.resetFileForm();
+    if (this.form.get('sourceCodeForm')?.value) {
       const sourceCode = {
-        "SourceCode": this.form.get('sourceCode')?.value
+        "SourceCode": this.form.get('sourceCodeForm')?.value
       }
-      this.apiService.parseSourceCode(sourceCode, options).subscribe(res => {
-        console.log(res);
+      this.apiService.parseSourceCode(sourceCode).subscribe(res => {
+        this.apiService.parseResults = res.response;
+        this.router.navigateByUrl('/metrics');
       })
-    } else if (this.form.get('solidityFile')?.value) {
-
-    } else {
-
     }
   }
 
-  goToMetricsTab() {
-    // this.selected = 2;
-  }
-
-  submitForm() {
-
+  fetchCode() {
+    this.resetFileForm();
+    this.resetSourceCodeForm();
+    if (this.form.get('contractAddressForm')?.value) {
+      const address = {
+        "address": this.form.get('contractAddressForm')?.value
+      }
+      this.apiService.fetchSourceCodeFromAddress(address).subscribe(res => {
+        if(res === 'Invalid Address Format') {
+          this.snackBar.open('Invalid address format', '', {
+            duration: 5000
+          });
+        } else if(res[0]['SourceCode'] === '') {
+          this.snackBar.open('Source Code not found!', '', {
+            duration: 5000
+          });
+        } else {
+          this.form.patchValue({
+            sourceCodeForm: res[0]['SourceCode']
+          });
+          this.snackBar.open('Source Code added in the editor', '', {
+            duration: 5000
+          });
+        }
+      })
+    }
   }
 }

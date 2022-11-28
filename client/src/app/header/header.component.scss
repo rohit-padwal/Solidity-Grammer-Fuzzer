@@ -1,0 +1,16 @@
+.mat-toolbar {
+    font-size: 250%;
+    font-weight: 500;
+    font-display: inherit;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+    .nav-buttons {
+        background-color: #f5f2f7;
+        // color: primary;
+        font-size: large;
+        padding-left: 10px;
+        margin: 10px 10px;
+        width: 100px;
+        height: 75px;
+    }
+}

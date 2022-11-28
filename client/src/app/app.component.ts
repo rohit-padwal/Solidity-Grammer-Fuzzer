@@ -9,7 +9,5 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 export class AppComponent {
   title = 'solgram';
   selected = 0;
-
-
   
 }

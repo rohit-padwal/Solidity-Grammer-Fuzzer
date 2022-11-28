@@ -9,19 +9,21 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  fetchSourceCodeFromAddress(address: string, headers: any): Observable < any > {
-    return this.httpClient.post('http://localhost:5000/fetchSourceCode', address, headers);
+  parseResults: any;
+
+  fetchSourceCodeFromAddress(address: any): Observable < any > {
+    return this.httpClient.post('http://127.0.0.1:5000/fetchSourceCode', address);
   }
 
-  parseSourceCode(sourceCode: any, headers: any): Observable < any > {
-    return this.httpClient.post('http://localhost:5000/parseSourceCode', sourceCode, headers);
+  parseSourceCode(sourceCode: any): Observable < any > {
+    return this.httpClient.post('http://127.0.0.1:5000/parseSourceCode', sourceCode);
   }
 
-  parseFile(file: File, headers: any): Observable < any > {
-    return this.httpClient.post('http://localhost:5000/parseFile', file, headers);
+  parseFile(file: any): Observable < any > {
+    return this.httpClient.post('http://127.0.0.1:5000/parseFile', file);
   }
 
-  lintAllFiles(): Observable < any > {
-    return this.httpClient.get('http://localhost:5000/lintAllFiles');
+  lintAllFiles(files: any): Observable < any > {
+    return this.httpClient.post('http://127.0.0.1:5000/lintAllFiles', files);
   }
 }

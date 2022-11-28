@@ -1,0 +1,24 @@
+<div class="main-container">
+    <form [formGroup]="form">
+        <br>
+        <mat-card>
+            <mat-card-title>Upload your solidity file</mat-card-title>
+            <mat-card-content>
+                <mat-toolbar appearance="outline">
+                    <input formControlName="solidityFileForm" type="file" accept=".sol" (change)="chooseFile($event)"
+                        multiple>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="parseFile()">Upload File</button>
+                    </mat-card-actions>
+                </mat-toolbar>
+            </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+            <mat-card-title>Linting Results</mat-card-title>
+            <mat-card-content>
+                {{result}}
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>
