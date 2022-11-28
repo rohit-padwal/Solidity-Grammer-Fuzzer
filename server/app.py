@@ -7,6 +7,8 @@ import parse_ast
 import parse_solhint_output
 import re
 from flask_cors import CORS
+import os
+import shutil
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -88,8 +90,14 @@ def count_comments(code):
 def parseLintOutput(output):
     return parse_solhint_output.parse_output(output)
 
-@app.route('/lintAllFiles', methods = ['GET'])
+@app.route('/lintAllFiles', methods = ['POST'])
 def lintAllFiles():
+    file_list = request.files.getlist("file")
+    if os.path.exists("contracts"):
+        shutil.rmtree("contracts")
+    os.makedirs("contracts")
+    for uploaded_file in file_list:
+        uploaded_file.save(os.path.join('contracts/', uploaded_file.filename))
     p = subprocess.Popen('solhint --fix "contracts/**/*.sol"', stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
     p_status = p.wait()
