@@ -21,8 +21,6 @@
     "avoid-call-value": "warn",
     "func-visibility": "warn",
     "check-send-result": "warn",
-    "state-visibility": "warn",
-    "func-visibility": "warn",
     "state-visibility": "warn"
   }
 }
