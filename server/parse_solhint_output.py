@@ -3,7 +3,7 @@ import json
 solgram_mitigations = json.load(open('linter_warnings.json', 'r'))
 
 
-def parse_output(output):
+def parse_output(output, file_list_name):
     string_output = output.decode()
     arr = string_output.split("\n")
     output_dict = dict()
@@ -15,6 +15,8 @@ def parse_output(output):
         found = False
         if not line == "":
             if ".sol" in line:
+                if line in file_list_name:
+                    file_list_name.remove(line)
                 if current_key is not "":
                     output_dict["response"].append(new_dict)
                 current_key = line
@@ -30,4 +32,10 @@ def parse_output(output):
                 if not found:
                     new_dict["errorResponse"].append(line)
     output_dict["response"].append(new_dict)
+    print(file_list_name)
+    for file in file_list_name:
+        new_dict = dict()
+        new_dict["contractName"] = file
+        new_dict["errorResponse"] = ["No vulnerabilities found"]
+        output_dict["response"].append(new_dict)
     return output_dict

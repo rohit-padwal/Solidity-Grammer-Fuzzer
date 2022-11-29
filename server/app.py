@@ -87,8 +87,8 @@ def count_comments(code):
         return 0
 
 
-def parseLintOutput(output):
-    return parse_solhint_output.parse_output(output)
+def parseLintOutput(output, file_list_name):
+    return parse_solhint_output.parse_output(output, file_list_name)
 
 @app.route('/lintAllFiles', methods = ['POST'])
 def lintAllFiles():
@@ -96,9 +96,11 @@ def lintAllFiles():
     if os.path.exists("contracts"):
         shutil.rmtree("contracts")
     os.makedirs("contracts")
+    file_list_name = list()
     for uploaded_file in file_list:
         uploaded_file.save(os.path.join('contracts/', uploaded_file.filename))
+        file_list_name.append('contracts/' + uploaded_file.filename)
     p = subprocess.Popen('solhint --fix "contracts/**/*.sol"', stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
     p_status = p.wait()
-    return parseLintOutput(output)
+    return parseLintOutput(output, file_list_name)
