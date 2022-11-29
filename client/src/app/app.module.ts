@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { ResultsComponent } from './results/results.component';
@@ -38,6 +39,7 @@ import { LintComponent } from './lint/lint.component';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatExpansionModule,
     MatSnackBarModule,
     HttpClientModule,
     BrowserModule,

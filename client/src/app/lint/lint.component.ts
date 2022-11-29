@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -9,9 +10,12 @@ import { ApiService } from '../services/api.service';
 })
 export class LintComponent implements OnInit {
 
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+
   form: FormGroup;
-  result: string;
+  result: any;
   files: string[] = [];
+  panelOpenState = false;
 
   constructor(private apiService: ApiService) { }
 
@@ -28,6 +32,7 @@ export class LintComponent implements OnInit {
     }
     this.apiService.lintAllFiles(formData).subscribe((res) => {
       console.log(res);
+      this.result = res.response;
     });
   }
 

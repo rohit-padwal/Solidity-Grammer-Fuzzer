@@ -1,7 +1,7 @@
 .main-container {
     margin-left: 18%;
     margin-right: 18%;
-    
+
 }
 
 .mat-toolbar {
@@ -41,4 +41,36 @@
     color: black;
 }
 
-.mat-raised-button {}
+
+.mat-expansion-panel-header {
+    background-color: #7b1fa2;
+    // background-color: #f5f2f7;
+}
+
+.mat-expansion-panel-content {
+    padding-top: 5px;
+    background-color: #f5f2f7;
+    color: #7b1fa2;
+    .mat-expansion-panel-body {
+        background-color: #f5f2f7;
+        color: #7b1fa2;
+    }
+}
+
+.example-action-buttons {
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
+    margin-left: 8px;
+}

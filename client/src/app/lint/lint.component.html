@@ -14,10 +14,26 @@
             </mat-card-content>
         </mat-card>
         <br>
-        <mat-card>
+        <mat-card *ngIf="result">
             <mat-card-title>Linting Results</mat-card-title>
             <mat-card-content>
-                {{result}}
+                <div class="example-action-buttons">
+                    <button mat-raised-button color="primary" (click)="accordion.openAll()">Expand All</button>
+                    <button mat-raised-button color="primary" (click)="accordion.closeAll()">Collapse All</button>
+                </div>
+                
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel *ngFor="let res of result">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{res.contractName}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div  *ngFor="let errRes of res.errorResponse">
+                            <p> {{errRes}} </p>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
             </mat-card-content>
         </mat-card>
     </form>
